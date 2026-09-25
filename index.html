@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>你的調性水晶手鏈｜瑪雅曆 × 水晶</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --surface:#fdf4eb; --raised:#fffaf5; --glass:rgba(176,148,195,.16); --glow-border:#8a6da3;
+  --heading:#956e5a; --body:#221326; --muted:#5a4c5c; --accent:#fce39a; --on-accent:#674322;
+  --pill-bg:#decce4; --pill-ink:#4e3d63; --focus:#6d4783;
+  --glow-star:0 0 18px rgba(242,180,128,.45); --glow-card:0 8px 28px rgba(103,73,128,.18);
+  --float:0 10px 30px rgba(65,52,104,.16); --text-glow:none;
+  --sky-top:#fdf4eb; --sky-bottom:#f1dccf; --star:#b094c3;
+  --display:Huninn,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --surface:#1f1b3f; --raised:#413468; --glass:rgba(234,214,240,.10); --glow-border:rgba(240,202,161,.6);
+    --heading:#fad09c; --body:#f9eeeb; --muted:#c3acea; --focus:#fce39a;
+    --glow-star:0 0 24px rgba(252,227,154,.55); --glow-card:0 0 40px rgba(250,208,156,.35);
+    --float:0 12px 36px rgba(15,10,35,.55); --text-glow:0 0 14px rgba(250,208,156,.55);
+    --sky-top:#1f1b3f; --sky-bottom:#674980; --star:#fce39a;
+  }
+}
+:root[data-theme="dark"]{
+  --surface:#1f1b3f; --raised:#413468; --glass:rgba(234,214,240,.10); --glow-border:rgba(240,202,161,.6);
+  --heading:#fad09c; --body:#f9eeeb; --muted:#c3acea; --focus:#fce39a;
+  --glow-star:0 0 24px rgba(252,227,154,.55); --glow-card:0 0 40px rgba(250,208,156,.35);
+  --float:0 12px 36px rgba(15,10,35,.55); --text-glow:0 0 14px rgba(250,208,156,.55);
+  --sky-top:#1f1b3f; --sky-bottom:#674980; --star:#fce39a;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--surface);color:var(--body);font:400 16px/28px var(--sans);-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--display);color:var(--heading);text-shadow:var(--text-glow);margin:0}
+h2{font-size:clamp(26px,5vw,36px);line-height:1.35;letter-spacing:.03em}
+.muted{color:var(--muted)}
+.pill{display:inline-block;background:var(--pill-bg);color:var(--pill-ink);font:700 14px/20px var(--sans);letter-spacing:.02em;padding:6px 14px;border-radius:999px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 28px;border:0;border-radius:999px;background:var(--accent);color:var(--on-accent);font:700 16px/1 var(--sans);letter-spacing:.04em;box-shadow:var(--glow-star);cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(1.04)}
+section{padding:64px 0}
+.glass{background:var(--glass);border:1px solid var(--glow-border);border-radius:20px;padding:32px}
+.placeholder{border:1.5px dashed var(--glow-border);border-radius:14px;padding:16px 18px;color:var(--muted);font-size:15px;line-height:26px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--sky-top),var(--sky-bottom));padding:80px 0 96px;text-align:center}
+.hero .stars{position:absolute;inset:0;pointer-events:none}
+.hero h1{font-size:clamp(34px,8vw,56px);line-height:1.25;letter-spacing:.04em;margin:20px 0 16px}
+.hero h1 em{font-style:normal;color:var(--body)}
+.hero p{font-size:clamp(17px,3.6vw,21px);line-height:1.7;margin:0 auto 32px;max-width:32em}
+.ring{display:block;margin:40px auto 0;width:min(320px,80vw)}
+
+/* calculator */
+.calc{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-top:24px}
+.calc label{display:flex;flex-direction:column;gap:6px;font:700 14px/20px var(--sans);flex:1 1 220px}
+.calc input{min-height:48px;padding:0 14px;border-radius:12px;border:1px solid var(--glow-border);background:var(--raised);color:var(--body);font:500 17px var(--sans)}
+.result{margin-top:32px;background:var(--raised);border-radius:32px;padding:32px;box-shadow:var(--glow-card);display:none}
+.result.show{display:block}
+.r-top{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.r-top .glyph{width:84px;flex:none}
+.kin{font:700 14px/20px var(--sans);color:var(--muted);letter-spacing:.08em}
+.r-name{font:700 clamp(26px,5vw,34px)/1.3 var(--display);color:var(--heading);text-shadow:var(--text-glow)}
+.r-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:28px}
+@media (min-width:640px){.r-grid{grid-template-columns:240px 1fr;align-items:center}}
+.stone{display:flex;gap:12px;align-items:flex-start;margin:0 0 16px}
+.dot{width:22px;height:22px;border-radius:50%;flex:none;margin-top:4px;box-shadow:inset -3px -4px 6px rgba(0,0,0,.18),inset 3px 3px 5px rgba(255,255,255,.5)}
+.stone b{display:block;font-size:17px}
+.note{font-size:13px;line-height:22px;margin-top:20px}
+
+/* tone table */
+.tones{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:28px}
+.tone{background:var(--glass);border:1px solid var(--glow-border);border-radius:20px;padding:18px 16px}
+.tone svg{height:34px;width:auto;display:block;margin-bottom:10px}
+.tone h3{font-size:18px;line-height:26px}
+.tone p{margin:4px 0 0;font-size:14px;line-height:22px}
+.tone .gem{display:flex;align-items:center;gap:8px;margin-top:10px;font:700 14px/20px var(--sans)}
+.tone .gem .dot{width:14px;height:14px;margin:0}
+
+/* offer */
+.offer{background:var(--raised);border-radius:32px;padding:36px 28px;box-shadow:var(--glow-card)}
+.offer ol{padding-left:1.3em;margin:16px 0 0}
+.offer li{margin:0 0 12px}
+.offer li b{color:var(--heading)}
+.price{font:700 40px/1.2 var(--display);color:var(--heading);margin:24px 0 4px}
+.steps{display:grid;gap:12px;margin-top:24px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step span{flex:none;width:32px;height:32px;border-radius:50%;background:var(--pill-bg);color:var(--pill-ink);font:700 15px/32px var(--sans);text-align:center}
+
+details{border-bottom:1px solid var(--glow-border);padding:14px 0}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:16px;min-height:28px}
+summary::after{content:"＋";color:var(--muted)}
+details[open] summary::after{content:"－"}
+details p{margin:10px 0 0;color:var(--muted)}
+
+footer{padding:48px 0 120px;text-align:center;font-size:14px;color:var(--muted)}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:var(--raised);box-shadow:0 -6px 24px rgba(15,10,35,.18);display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:10}
+.bar div{font:700 15px/22px var(--sans)}
+.bar small{display:block;font-weight:500;color:var(--muted)}
+.bar .btn{min-height:44px;padding:0 20px;font-size:15px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="stars" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="var(--star)">
+      <circle cx="30" cy="40" r="1.4"/><circle cx="90" cy="120" r="1"/><circle cx="160" cy="30" r="1.6"/>
+      <circle cx="250" cy="70" r="1.1"/><circle cx="330" cy="30" r="1.5"/><circle cx="370" cy="150" r="1"/>
+      <circle cx="60" cy="220" r="1.2"/><circle cx="300" cy="240" r="1.3"/><circle cx="200" cy="180" r=".9"/>
+    </g>
+  </svg>
+  <div class="wrap" style="position:relative">
+    <span class="pill">瑪雅曆 13 調性 × 天然水晶</span>
+    <h1>你的調性，<br><em>早就替你挑好</em>那顆水晶</h1>
+    <p class="muted">輸入生日 30 秒，看見你的瑪雅印記、調性，<br>和一條只屬於你的能量手鏈配方。</p>
+    <a class="btn" href="#free">免費查我的調性手鏈</a>
+    <svg class="ring" id="heroRing" viewBox="0 0 320 320" aria-label="13 種調性環成一圈的手鏈示意"></svg>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <h2>在你開始之前，先聽我說</h2>
+      <div class="placeholder" style="margin-top:20px">
+        [你的故事，建議 3 小段]<br>
+        ① 過去的你：做什麼、卡在哪裡（一個具體畫面）<br>
+        ② 轉折：第一次接觸瑪雅曆／水晶，看懂了什麼<br>
+        ③ 現在：為什麼把「調性」和「水晶」放在一起，想陪誰走這段路
+      </div>
+    </div>
+  </section>
+
+  <section id="free" style="padding-top:0">
+    <div class="wrap">
+      <div class="glass">
+        <span class="pill">免費版</span>
+        <h2 style="margin-top:14px">查你的印記與調性手鏈</h2>
+        <p class="muted" style="margin:8px 0 0">依「13 月亮曆（Dreamspell）」計算，陽曆生日即可。</p>
+        <div class="calc">
+          <label for="bday">你的生日
+            <input id="bday" type="date" min="1900-01-01" max="2100-12-31" value="1995-06-15">
+          </label>
+          <button class="btn" id="go" type="button">看我的手鏈</button>
+        </div>
+        <p id="err" class="muted" role="alert" style="margin:10px 0 0"></p>
+      </div>
+
+      <div class="result" id="result" aria-live="polite">
+        <div class="r-top">
+          <svg class="glyph" id="rGlyph" viewBox="0 0 100 100" aria-hidden="true"></svg>
+          <div>
+            <div class="kin" id="rKin"></div>
+            <div class="r-name" id="rName"></div>
+            <div class="muted" id="rKeys"></div>
+          </div>
+        </div>
+        <div class="r-grid">
+          <svg id="rBracelet" viewBox="0 0 240 240" aria-label="你的手鏈配色示意"></svg>
+          <div>
+            <div class="stone"><i class="dot" id="mainDot"></i><div><b id="mainName"></b><span class="muted" id="mainWhy"></span></div></div>
+            <div class="stone"><i class="dot" id="subDot"></i><div><b id="subName"></b><span class="muted" id="subWhy"></span></div></div>
+            <p style="margin:8px 0 0" id="rLine"></p>
+          </div>
+        </div>
+        <p class="note muted">這是依「調性」配主石、依「圖騰顏色」配輔石的基礎配方。完整版會再加入引導、支持、挑戰、隱藏四個位置，配出五顆石頭的完整手鏈。2 月 29 日出生者依 13 月亮曆慣例與 2 月 28 日同印記。</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>13 調性 × 主石對照</h2>
+      <p class="muted" style="margin:8px 0 0">瑪雅數字以「點」代表 1、「橫槓」代表 5。每一個調性，都是你前進時的節奏。</p>
+      <div class="tones" id="toneGrid"></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="offer">
+        <span class="pill">完整版</span>
+        <h2 style="margin-top:14px">你的五大能量盤 × 客製調性手鏈</h2>
+        <p class="muted" style="margin:8px 0 0">免費版看見主軸；完整版把你的整張印記讀透，再做成戴在手上的提醒。</p>
+        <ol>
+          <li><b>主印記深度解讀</b>：你的天賦、容易卡住的地方，以及調性給你的前進節奏。</li>
+          <li><b>引導、支持、挑戰、隱藏四個位置</b>：誰在幫你、什麼在考驗你、你沒發現的那股力量。</li>
+          <li><b>五顆石的手鏈配方</b>：每一顆為什麼放在那裡，寫給你看得懂的版本。</li>
+          <li><b>量你的手圍，親手串製</b>：[材質說明，例如天然水晶等級、產地、是否附檢驗]。</li>
+          <li><b>配戴與淨化指南</b>：哪隻手戴、多久淨化一次、什麼時候拿下來。</li>
+        </ol>
+        <div class="price">[價格] 元</div>
+        <div class="muted">解讀＋手鏈一次完成，[運費說明]</div>
+        <div class="steps">
+          <div class="step"><span>1</span><div>點下方按鈕加入官方 LINE，傳「調性手鏈」。</div></div>
+          <div class="step"><span>2</span><div>填寫生日與手圍，完成付款。</div></div>
+          <div class="step"><span>3</span><div>[X] 天內收到解讀，手鏈 [X] 個工作天內寄出。</div></div>
+        </div>
+        <p style="margin:28px 0 0"><a class="btn" href="[你的官方 LINE 連結]">加入 LINE 預約我的手鏈</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>戴上之後，他們說</h2>
+      <div class="placeholder" style="margin-top:20px">[放真實客人回饋與手鏈實拍照，徵得本人同意後使用；可附調性與圖騰，例如「Kin 207 藍色水晶手」]</div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>常見問題</h2>
+      <div style="margin-top:16px">
+        <details><summary>我完全不懂瑪雅曆，也可以嗎？</summary><p>可以。只要有陽曆生日，我會從最基礎的「你是誰」開始講起，不需要先做功課。</p></details>
+        <details><summary>水晶是天然的嗎？</summary><p>[說明來源、等級、是否附檢驗或保證]</p></details>
+        <details><summary>為什麼用「調性」來配水晶？</summary><p>圖騰說的是你是誰，調性說的是你用什麼節奏前進。手鏈是每天戴在身上的東西，所以我讓主石對應你的節奏，提醒你用自己的方式走。</p></details>
+        <details><summary>手圍怎麼量？</summary><p>用軟尺貼著手腕骨上方繞一圈，量到的數字加 1–1.5 公分就是適合的手鏈尺寸。沒有軟尺也可以用紙條量完再用尺對。</p></details>
+        <details><summary>戴了就會改變運勢嗎？</summary><p>水晶和曆法是陪你看見自己、提醒自己的工具，不是保證。真正讓事情改變的，是你看見之後做的選擇。</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="font:700 16px/24px var(--display);color:var(--heading)">Rachel · 瑪雅 × 水晶</div>
+    <div>[IG 帳號]</div>
+    <p style="margin:12px 0 0">本頁解讀與水晶功效僅供自我探索參考，不取代醫療、心理或財務等專業建議。</p>
+  </div>
+</footer>
+
+<div class="bar">
+  <div>客製調性手鏈<small>五大能量盤解讀＋手鏈 · [價格] 元</small></div>
+  <a class="btn" href="[你的官方 LINE 連結]">立即預約</a>
+</div>
+
+<script>
+const TONES=[
+ {n:"磁性",k:"統一・目的・吸引",g:"白水晶",c:"#eef1f4",w:"幫你聚焦意圖，把分散的能量收回到「我到底要什麼」。"},
+ {n:"月亮",k:"挑戰・極化・穩定",g:"月光石",c:"#dde2f0",w:"陪你接住情緒起伏，在兩難之間找回穩定。"},
+ {n:"電力",k:"服務・啟動・連結",g:"紅玉髓",c:"#cf6a3f",w:"點燃行動力，讓你從想很多變成動起來。"},
+ {n:"自我存在",k:"形式・定義・衡量",g:"煙晶",c:"#7a6352",w:"幫你落地、建立結構，把想法變成可執行的形狀。"},
+ {n:"超頻",k:"力量・授權・指揮",g:"虎眼石",c:"#b07a2e",w:"強化自信與決斷，敢站到前面帶領。"},
+ {n:"韻律",k:"平衡・組織・平等",g:"綠幽靈",c:"#7fa37a",w:"平衡工作與生活，讓成長有節奏、不透支。"},
+ {n:"共振",k:"調頻・通道・啟發",g:"紫水晶",c:"#9a6bc4",w:"安定思緒、打開直覺，聽見內在真正的聲音。"},
+ {n:"銀河",k:"整合・和諧・塑造",g:"粉晶",c:"#f1b6c4",w:"修復關係、整合內外，讓言行和信念一致。"},
+ {n:"太陽",k:"意圖・脈動・實現",g:"黃水晶",c:"#e6b545",w:"把意圖推向實現，帶來豐盛與行動的熱度。"},
+ {n:"行星",k:"顯化・完善・生產",g:"金髮晶",c:"#d4bd72",w:"幫你把成果做出來、把財富落地。"},
+ {n:"光譜",k:"釋放・解放・溶解",g:"海藍寶",c:"#8cc6d6",w:"溫柔地放下舊的，讓表達與情緒重新流動。"},
+ {n:"水晶",k:"合作・奉獻・普及",g:"天河石",c:"#6fbfae",w:"讓溝通真誠順暢，在團隊與社群裡找到位置。"},
+ {n:"宇宙",k:"臨在・超越・持久",g:"拉長石",c:"#5f7a8f",w:"在轉變期守住自己，陪你跨過一個階段。"}
+];
+const SEALS=[
+ ["紅龍","誕生・滋養"],["白風","靈性・溝通"],["藍夜","豐盛・夢想"],["黃種子","開花・覺察"],
+ ["紅蛇","生命力・本能"],["白世界橋","連結・機會"],["藍手","成就・療癒"],["黃星星","優雅・藝術"],
+ ["紅月","淨化・流動"],["白狗","愛・忠誠"],["藍猴","魔法・遊戲"],["黃人","自由意志・智慧"],
+ ["紅天行者","探索・空間"],["白巫師","接收・魅力"],["藍鷹","視野・創造"],["黃戰士","提問・無畏"],
+ ["紅地球","導航・共時"],["白鏡","反映・秩序"],["藍風暴","轉化・催化"],["黃太陽","開悟・生命"]
+];
+const COLORS=[
+ {name:"紅",fam:"啟動",g:"石榴石",c:"#8e1f2e",w:"紅色家族的你負責啟動，石榴石補充熱情與續航。"},
+ {name:"白",fam:"淨化",g:"白硨磲",c:"#f3eee3",w:"白色家族的你負責淨化，白硨磲幫你保持清明（有機寶石）。"},
+ {name:"藍",fam:"轉化",g:"青金石",c:"#2c3f8f",w:"藍色家族的你負責轉化，青金石陪你看清方向。"},
+ {name:"黃",fam:"成熟",g:"太陽石",c:"#e08a3c",w:"黃色家族的你負責成熟收穫，太陽石讓你更敢發光。"}
+];
+
+function glyph(n,fill){ // Maya numeral: dots over bars
+  const bars=Math.floor(n/5), dots=n%5, parts=[];
+  let y=10;
+  if(dots){const gap=18,start=50-(dots-1)*gap/2;for(let i=0;i<dots;i++)parts.push(`<circle cx="${start+i*gap}" cy="${y+7}" r="7"/>`);y+=24;}
+  for(let i=0;i<bars;i++){parts.push(`<rect x="10" y="${y}" width="80" height="12" rx="6"/>`);y+=20;}
+  return {svg:`<g fill="${fill}">${parts.join("")}</g>`,h:y};
+}
+function toneSvg(n,fill){const g=glyph(n,fill);return `<svg viewBox="0 0 100 ${Math.max(g.h,30)}" aria-hidden="true">${g.svg}</svg>`;}
+
+function bracelet(svg,main,sub){
+  const N=18,cx=120,cy=120,R=88,out=[];
+  out.push(`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--glow-border)" stroke-width="1" opacity=".5"/>`);
+  for(let i=0;i<N;i++){
+    const a=(i/N)*Math.PI*2-Math.PI/2,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);
+    const isSub=i%6===0, col=isSub?sub:main;
+    out.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="14.5" fill="${col}" stroke="rgba(0,0,0,.15)"/>`);
+    out.push(`<circle cx="${(x-4).toFixed(1)}" cy="${(y-5).toFixed(1)}" r="4" fill="#fff" opacity=".45"/>`);
+  }
+  svg.innerHTML=out.join("");
+}
+
+// Dreamspell kin: ref 2012-12-21 = Kin 207, Feb 29 skipped
+const isLeap=y=>(y%4===0&&y%100!==0)||y%400===0;
+const leapsThrough=y=>Math.floor(y/4)-Math.floor(y/100)+Math.floor(y/400);
+function adjDays(y,m,d){
+  if(m===2&&d===29)d=28;
+  const days=Date.UTC(y,m-1,d)/864e5;
+  const feb29=leapsThrough(y-1)+(isLeap(y)&&m>2?1:0);
+  return days-feb29;
+}
+function kinOf(y,m,d){
+  const diff=adjDays(y,m,d)-adjDays(2012,12,21);
+  return (((206+diff)%260)+260)%260+1;
+}
+
+function show(){
+  const v=document.getElementById("bday").value, err=document.getElementById("err");
+  if(!v){err.textContent="請先選擇生日。";return;}
+  err.textContent="";
+  const [y,m,d]=v.split("-").map(Number);
+  const kin=kinOf(y,m,d), ti=(kin-1)%13, si=(kin-1)%20, T=TONES[ti], S=SEALS[si], C=COLORS[si%4];
+  const colorWord={"紅":"紅色","白":"白色","藍":"藍色","黃":"黃色"}[C.name];
+  const sealShort=S[0].slice(1);
+  document.getElementById("rKin").textContent=`KIN ${kin}・第 ${ti+1} 調性`;
+  document.getElementById("rName").textContent=`${colorWord}${T.n}的${sealShort}`;
+  document.getElementById("rKeys").textContent=`圖騰 ${S[0]}：${S[1]}｜調性 ${T.n}：${T.k}`;
+  const g=glyph(ti+1,"var(--heading)");
+  const gl=document.getElementById("rGlyph");gl.setAttribute("viewBox",`0 0 100 ${Math.max(g.h,30)}`);gl.innerHTML=g.svg;
+  document.getElementById("mainDot").style.background=T.c;
+  document.getElementById("mainName").textContent=`主石｜${T.g}`;
+  document.getElementById("mainWhy").textContent=T.w;
+  document.getElementById("subDot").style.background=C.c;
+  document.getElementById("subName").textContent=`輔石｜${C.g}`;
+  document.getElementById("subWhy").textContent=C.w;
+  document.getElementById("rLine").textContent=`你的節奏是「${T.k.split("・")[0]}」。先別急著模仿別人的步調，用${T.n}的方式前進，就是你最順的路。`;
+  bracelet(document.getElementById("rBracelet"),T.c,C.c);
+  const r=document.getElementById("result");r.classList.add("show");r.scrollIntoView({behavior:"smooth",block:"start"});
+}
+document.getElementById("go").addEventListener("click",show);
+
+// tone grid
+document.getElementById("toneGrid").innerHTML=TONES.map((t,i)=>`
+  <div class="tone">${toneSvg(i+1,"var(--heading)")}
+    <h3>${i+1}・${t.n}</h3><p class="muted">${t.k}</p>
+    <div class="gem"><i class="dot" style="background:${t.c}"></i>${t.g}</div>
+  </div>`).join("");
+
+// hero ring: 13 beads
+(function(){
+  const s=document.getElementById("heroRing"),cx=160,cy=160,R=120,o=[];
+  TONES.forEach((t,i)=>{const a=(i/13)*Math.PI*2-Math.PI/2,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);
+    o.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="20" fill="${t.c}" stroke="rgba(0,0,0,.12)"/><circle cx="${(x-6).toFixed(1)}" cy="${(y-7).toFixed(1)}" r="5" fill="#fff" opacity=".45"/>`);});
+  o.push(`<text x="160" y="152" text-anchor="middle" font-family="Huninn,sans-serif" font-size="22" fill="var(--heading)">13</text><text x="160" y="180" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="14" fill="var(--muted)">種調性・13 顆主石</text>`);
+  s.innerHTML=o.join("");
+})();
+</script>
+</body>
+</html>
